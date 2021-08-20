@@ -1,3 +1,13 @@
+:root {
+  --cl-pri: #fff7df;
+  --cl-sec: #ccc5b9;
+  --cl-pri-dk: #252422;
+  --cl-acc: #eb5e28;
+  --cl-tt: #efefef;
+  --fn-tit: "Oswald";
+  --fn-text: "Ubuntu";
+}
+
 *,
 *::before,
 *::after {
@@ -5,18 +15,33 @@
   margin: 0;
 }
 
+html {
+  font-family: var(--fn-text);
+}
+
 body {
+  height: 100vh;
   margin: 0;
   display: grid;
   grid-template: "wel wel wel wel" 100vh ". pro pro ." auto / 1fr 4fr 4fr 1fr;
+  background-color: var(--cl-pri);
 }
 
 #welcome-section {
   grid-area: wel;
-  background: brown;
+  background: var(--cl-pri-dk);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#welcome-section h1 {
+  color: var(--cl-sec);
+  font-family: var(--fn-tit);
+  font-weight: 500;
+  font-size: 10vw;
+  width: max-content;
+  /*outline: 1px solid grey;*/
 }
 
 #projects {
@@ -25,29 +50,39 @@ body {
   padding: 5rem;
   display: grid;
   grid-auto-columns: auto;
+  grid-gap: 20px;
+}
+
+.projects-title {
+  font-size: 5em;
 }
 
 .project-tile {
   display: grid;
   grid-template:
     "tti tti tti link" minmax(55px, 15%)
-    "info info img img" minmax(300px, 70%);
+    "info info img img" minmax(300px, 70%)
+    / 1fr 40% 40% 1fr;
   width: 100%;
   height: auto;
   background: cornflowerblue;
+  box-shadow: 0px 10px 19px -1px rgba(0, 0, 0, 0.39);
 }
 
 .project-tile a {
   grid-area: link;
+  background: var(--cl-tt);
 }
-.project-tile .tile-title {
+.tile-title {
   grid-area: tti;
   margin: 0;
+  background: var(--cl-tt);
 }
 .project-tile p {
   grid-area: info;
+  background: var(--cl-sec);
 }
-.project-tile .img-display {
+.img-display {
   grid-area: img;
   max-width: 100%;
   position: relative;
@@ -66,7 +101,11 @@ body {
   outline: 1px solid red;
 }
 
-.project-tile .tile-title,
+.tile-info {
+  padding: 5em;
+}
+
+.tile-title,
 .project-tile a,
 .project-tile p {
   display: flex;
@@ -74,31 +113,81 @@ body {
   height: 100%;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
 }
 nav {
   position: fixed;
   width: 100vw;
   height: 60px;
   display: flex;
-
+  z-index: 999;
   justify-content: center;
-  background: rgb(0, 0, 0);
+  background: var(--cl-pri-dk);
 }
 
 .section-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-
+  margin: 5px;
+  border-left: 2px solid var(--cl-acc);
+  border-right: 2px solid var(--cl-acc);
   background: coral;
-  border: 1px solid blue;
 }
 
-#welcome-section {
-  /*height: 100vh;*/
+.section-link a {
+  display: flex;
+  text-decoration: none;
+  color: var(--cl-pri);
+  padding: 10px;
 }
 
-@media only screen and (min-width: 850px) {
+#profile {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.39);
+  z-index: 999999;
+  opacity: 0;
+  display: none;
+}
+
+#profile .close {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 1%;
+  right: 1%;
+  background: white;
+  color: var(--cl-pri-dk);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+#profile .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40vw;
+  height: 40vh;
+  background: var(--cl-sec);
+  padding: 2em;
+}
+
+#profile .content p {
+  width: 55%;
+}
+
+#profile:target {
+  opacity: 1;
+  display: block;
+}
+@media only screen and (width: 850px) {
+  nav {
+    height: 2vh;
+  }
 }
